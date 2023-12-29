@@ -5,6 +5,7 @@ import { useLazyGetSummaryQuery } from '../services/article';
 import History from './History';
 import { LuLoader2 } from "react-icons/lu";
 
+
 export interface IArticle {
   url: string,
   summary: string
@@ -15,6 +16,8 @@ const Demo = () => {
     url: "",
     summary: ""
   });
+
+  const [copied, setCopied] = useState< null | boolean>();
 
   const [allArticles, setAllArticles] = useState<[] | IArticle[]>([]);
 
@@ -37,9 +40,16 @@ const Demo = () => {
       const updatedAllArticles = [newArticle, ...allArticles];
 
       setArticle(newArticle);
+      setAllArticles(updatedAllArticles);
       localStorage.setItem("articles", JSON.stringify(updatedAllArticles));
     }
-  } 
+  }
+  
+  const handleCopyUrl = (copyUrl: string) => {
+    setCopied(true);
+    navigator.clipboard.writeText(copyUrl);
+    setTimeout(() => setCopied(false), 3000)
+  }
 
   return (
     <section className="mt-16 w-full flex justify-center lg:mx-0">
@@ -67,7 +77,7 @@ const Demo = () => {
             </button>
         </form>
 
-        <History articles={allArticles} setArticle={setArticle}/>
+        <History articles={allArticles} currentArticle={article} handleCopy={handleCopyUrl} setArticle={setArticle} copied={copied}/>
 
 
         {/* Displaying results */}
@@ -90,7 +100,7 @@ const Demo = () => {
                 </h2>
 
                 <div className="rounded-xl border border-gray-200 bg-white/20 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-4">
-                  <p>{article.summary}</p>
+                  <p className='text-gray-700 font-inter font-medium text-sm'>{article.summary}</p>
                 </div>
               </div>
             )
