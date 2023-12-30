@@ -5,7 +5,6 @@ import { useLazyGetSummaryQuery } from '../services/article';
 import History from './History';
 import { LuLoader2 } from "react-icons/lu";
 
-
 export interface IArticle {
   url: string,
   summary: string

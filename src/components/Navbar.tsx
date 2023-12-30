@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Navbar = () => {
   return (
     <header className='flex px-10 py-3 justify-center shadow-lg mb-10 w-full items-center'>
