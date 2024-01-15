@@ -16,7 +16,7 @@ const Demo = () => {
     summary: ""
   });
 
-  const [articleLength, setArticleLength] = useState<string | number>(3);
+  const [articleLength, setArticleLength] = useState<string | number>(5);
 
   const [copied, setCopied] = useState< null | boolean>();
 
